@@ -13,30 +13,35 @@ if (result.error) {
 
 
 let device;
-find(process.env.PC_IP)
-    .then(device => this.device = device)
-    .catch(console.error);
 
+if (process.env.PRODUCTION === true) {
+    find(process.env.PC_IP)
+        .then(device => {
+            this.device = device;
+            console.log("Device found!")
+        })
+        .catch(console.error);
+}
 
 const router = Router();
 router.get('/hibernate', function (req, res) {
-    console.log('hi');
     res.end();
 });
 router.get('/wake', function (req, res) {
+
     wol(this.device.mac).then(() => {
         console.log('wol sent!')
     });
     res.end();
 });
 
-const server = http.createServer(function(req, res) {
+const server = http.createServer(function (req, res) {
+    console.log('recieved request: ', req.url);
+
     router(req, res, finalhandler(req, res));
-
-
-
-    console.log('Server created')
 });
 
 
-server.listen(8080);
+server.listen(process.env.PORT, () => {
+    console.log("Server listening on port", process.env.PORT);
+});
