@@ -19,7 +19,8 @@ if (process.env.PRODUCTION === 'true') {
     find(process.env.PC_IP)
         .then(device => {
             this.device = device;
-            console.log("Device found!");
+            console.log("Device found!", device);
+
         })
         .catch(console.error);
 }
