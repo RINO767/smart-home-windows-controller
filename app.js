@@ -14,11 +14,12 @@ if (result.error) {
 
 let device;
 
-if (process.env.PRODUCTION === true) {
+if (process.env.PRODUCTION === 'true') {
+    console.log('production mode');
     find(process.env.PC_IP)
         .then(device => {
             this.device = device;
-            console.log("Device found!")
+            console.log("Device found!");
         })
         .catch(console.error);
 }
