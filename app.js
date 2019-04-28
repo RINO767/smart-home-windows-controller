@@ -31,7 +31,7 @@ router.get('/hibernate', function (req, res) {
 });
 router.get('/wake', function (req, res) {
 
-    wol(this.device.mac).then(() => {
+    wol(device.mac).then(() => {
         console.log('wol sent!')
     });
     res.end();
