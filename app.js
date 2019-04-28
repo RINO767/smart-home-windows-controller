@@ -30,10 +30,14 @@ router.get('/wake', function (req, res) {
         find(process.env.PC_IP)
             .then(device => {
                 wol(device.mac).then(() => {
-                    console.log('wol sent!')
+                    console.log('wol sent!');
+                    res.end('wol sent!');
                 });
             })
-            .catch(console.error);
+            .catch(err =>{
+                console.error(err);
+                req.end(500, 'internal server error')
+            });
     } else {
         res.end('production only');
     }
