@@ -1,0 +1,26 @@
+{
+  "name": "smart-home-windows-controller",
+  "version": "1.0.0",
+  "description": "simple server that listens for web requests to control a computer in the local network",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RINO767/smart-home-windows-controller.git"
+  },
+  "author": "Florian Lappe",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/RINO767/smart-home-windows-controller/issues"
+  },
+  "homepage": "https://github.com/RINO767/smart-home-windows-controller#readme",
+  "dependencies": {
+    "dotenv": "^7.0.0",
+    "finalhandler": "^1.1.1",
+    "local-devices": "^2.0.0",
+    "router": "^1.3.3",
+    "wakeonlan": "^0.1.0"
+  }
+}
