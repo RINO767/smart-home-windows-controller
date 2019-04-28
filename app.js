@@ -11,30 +11,32 @@ if (result.error) {
     throw result.error
 }
 
-
-let device;
-
 if (process.env.PRODUCTION === 'true') {
     console.log('production mode');
-    find(process.env.PC_IP)
-        .then(device => {
-            this.device = device;
-            console.log("Device found!", device);
-
-        })
-        .catch(console.error);
+} else {
+    console.log('development mode');
 }
 
+
 const router = Router();
+
 router.get('/hibernate', function (req, res) {
     res.end();
 });
+
 router.get('/wake', function (req, res) {
 
-    wol(device.mac).then(() => {
-        console.log('wol sent!')
-    });
-    res.end();
+    if (process.env.PRODUCTION === 'true') {
+        find(process.env.PC_IP)
+            .then(device => {
+                wol(device.mac).then(() => {
+                    console.log('wol sent!')
+                });
+            })
+            .catch(console.error);
+    } else {
+        res.end('production only');
+    }
 });
 
 const server = http.createServer(function (req, res) {
